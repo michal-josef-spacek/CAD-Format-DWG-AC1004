@@ -2254,8 +2254,7 @@ sub _read {
     $self->{entities_start} = $self->{_io}->read_s4le();
     $self->{entities_end} = $self->{_io}->read_s4le();
     $self->{blocks_start} = $self->{_io}->read_s4le();
-    $self->{blocks_size} = $self->{_io}->read_s2le();
-    $self->{unknown4a} = $self->{_io}->read_bytes(2);
+    $self->{blocks_size} = $self->{_io}->read_u4le();
     $self->{blocks_end} = $self->{_io}->read_s4le();
     $self->{unknown4b} = $self->{_io}->read_bytes(2);
     $self->{unknown4c} = $self->{_io}->read_bytes(2);
@@ -2492,11 +2491,6 @@ sub blocks_start {
 sub blocks_size {
     my ($self) = @_;
     return $self->{blocks_size};
-}
-
-sub unknown4a {
-    my ($self) = @_;
-    return $self->{unknown4a};
 }
 
 sub blocks_end {

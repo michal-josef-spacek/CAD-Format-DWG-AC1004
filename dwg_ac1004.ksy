@@ -89,9 +89,7 @@ types:
       - id: blocks_start
         type: s4
       - id: blocks_size
-        type: s2
-      - id: unknown4a
-        size: 2
+        type: u4
       - id: blocks_end
         type: s4
       - id: unknown4b

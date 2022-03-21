@@ -248,7 +248,7 @@ types:
         doc: 0x0166-0x0167, $LUPREC
       - id: axis
         type: s2
-        doc: 0x0168-0x0169, $AXISMODE
+        doc: 0x0168-0x0169, $AXISMODE/70
       - id: axis_value
         type: point_2d
         doc: 0x016a-0x0179, $AXISUNIT/10|20

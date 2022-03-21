@@ -42,7 +42,7 @@ seq:
     repeat-expr: header.table_view.items
   - id: block_entities
     type: real_entities
-    size: header.blocks_end - header.blocks_start
+    size: header.blocks_size
   - id: todo
     size-eos: true
     repeat: eos
@@ -108,7 +108,7 @@ types:
         type: s4
       - id: blocks_start
         type: s4
-      - id: blocks_size
+      - id: blocks_size_raw
         type: u4
       - id: blocks_end
         type: s4
@@ -128,6 +128,11 @@ types:
         type: table
       - id: variables
         type: header_variables
+    instances:
+      blocks_size_unknown:
+         value: (blocks_size_raw & 0xff000000) >> 24
+      blocks_size:
+         value: (blocks_size_raw & 0x00ffffff)
   table:
     seq:
       - id: item_size

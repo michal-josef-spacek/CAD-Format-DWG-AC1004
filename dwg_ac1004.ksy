@@ -67,8 +67,6 @@ types:
         type: s1
       - id: u5
         type: s1
-      - id: u6
-        type: s1
   block_flag:
     seq:
       - id: flag1

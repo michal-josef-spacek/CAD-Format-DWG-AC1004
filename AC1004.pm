@@ -2172,7 +2172,6 @@ sub _read {
     $self->{u3} = $self->{_io}->read_s1();
     $self->{u4} = $self->{_io}->read_s1();
     $self->{u5} = $self->{_io}->read_s1();
-    $self->{u6} = $self->{_io}->read_s1();
 }
 
 sub flag {
@@ -2203,11 +2202,6 @@ sub u4 {
 sub u5 {
     my ($self) = @_;
     return $self->{u5};
-}
-
-sub u6 {
-    my ($self) = @_;
-    return $self->{u6};
 }
 
 ########################################################################

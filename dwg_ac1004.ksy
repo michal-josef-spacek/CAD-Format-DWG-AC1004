@@ -500,8 +500,23 @@ types:
       - id: dim_linear_measurements_scale_factor
         type: f8
         doc: 0x03cd-0x03d4, $DIMLFAC
-      - id: unknown31
-        size: 26
+      - id: spline_segs
+        type: s2
+        doc: 0x03d5-0x03d6, $SPLINESEGS, TODO
+      - id: spline_frame
+        type: s1
+        doc: 0x03d7, $SPLFRAME, TODO
+      - id: unknown31a
+        type: s1
+      - id: unknown31b
+        type: s1
+      - id: unknown31c
+        size: 19
+      - id: mirror_text
+        type: s1
+        doc: 0x03ed, $MIRRTEXT, TODO
+      - id: unknown31d
+        type: s1
     instances:
       create_date:
         value: create_date_days + (create_date_ms / 86400000.0)

@@ -2786,7 +2786,13 @@ sub _read {
     $self->{dim_alternate_measurement_postfix} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(16), 0, 0));
     $self->{dim_alternate_units_multiplier} = $self->{_io}->read_f8le();
     $self->{dim_linear_measurements_scale_factor} = $self->{_io}->read_f8le();
-    $self->{unknown31} = $self->{_io}->read_bytes(26);
+    $self->{spline_segs} = $self->{_io}->read_s2le();
+    $self->{spline_frame} = $self->{_io}->read_s1();
+    $self->{unknown31a} = $self->{_io}->read_s1();
+    $self->{unknown31b} = $self->{_io}->read_s1();
+    $self->{unknown31c} = $self->{_io}->read_bytes(19);
+    $self->{mirror_text} = $self->{_io}->read_s1();
+    $self->{unknown31d} = $self->{_io}->read_s1();
 }
 
 sub create_date {
@@ -3373,9 +3379,39 @@ sub dim_linear_measurements_scale_factor {
     return $self->{dim_linear_measurements_scale_factor};
 }
 
-sub unknown31 {
+sub spline_segs {
     my ($self) = @_;
-    return $self->{unknown31};
+    return $self->{spline_segs};
+}
+
+sub spline_frame {
+    my ($self) = @_;
+    return $self->{spline_frame};
+}
+
+sub unknown31a {
+    my ($self) = @_;
+    return $self->{unknown31a};
+}
+
+sub unknown31b {
+    my ($self) = @_;
+    return $self->{unknown31b};
+}
+
+sub unknown31c {
+    my ($self) = @_;
+    return $self->{unknown31c};
+}
+
+sub mirror_text {
+    my ($self) = @_;
+    return $self->{mirror_text};
+}
+
+sub unknown31d {
+    my ($self) = @_;
+    return $self->{unknown31d};
 }
 
 ########################################################################

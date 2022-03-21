@@ -1926,28 +1926,22 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{frozen} = $self->{_io}->read_s1();
-    $self->{layer_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(31), 0, 0));
-    $self->{unknown1} = $self->{_io}->read_s1();
+    $self->{flag} = CAD::Format::DWG::AC1004::LayerFlag->new($self->{_io}, $self, $self->{_root});
+    $self->{layer_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
     $self->{color} = $self->{_io}->read_s1();
     $self->{unknown2} = $self->{_io}->read_s1();
     $self->{linetype_index} = $self->{_io}->read_s1();
     $self->{unknown3} = $self->{_io}->read_s1();
 }
 
-sub frozen {
+sub flag {
     my ($self) = @_;
-    return $self->{frozen};
+    return $self->{flag};
 }
 
 sub layer_name {
     my ($self) = @_;
     return $self->{layer_name};
-}
-
-sub unknown1 {
-    my ($self) = @_;
-    return $self->{unknown1};
 }
 
 sub color {
@@ -4018,6 +4012,86 @@ sub bulge {
 sub unknown_in_radians {
     my ($self) = @_;
     return $self->{unknown_in_radians};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1004::LayerFlag;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{flag1} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag2} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag3} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag4} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag5} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag6} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag7} = $self->{_io}->read_bits_int_be(1);
+    $self->{frozen} = $self->{_io}->read_bits_int_be(1);
+}
+
+sub flag1 {
+    my ($self) = @_;
+    return $self->{flag1};
+}
+
+sub flag2 {
+    my ($self) = @_;
+    return $self->{flag2};
+}
+
+sub flag3 {
+    my ($self) = @_;
+    return $self->{flag3};
+}
+
+sub flag4 {
+    my ($self) = @_;
+    return $self->{flag4};
+}
+
+sub flag5 {
+    my ($self) = @_;
+    return $self->{flag5};
+}
+
+sub flag6 {
+    my ($self) = @_;
+    return $self->{flag6};
+}
+
+sub flag7 {
+    my ($self) = @_;
+    return $self->{flag7};
+}
+
+sub frozen {
+    my ($self) = @_;
+    return $self->{frozen};
 }
 
 ########################################################################

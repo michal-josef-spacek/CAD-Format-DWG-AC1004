@@ -128,6 +128,20 @@ types:
         type: table
       - id: table_view
         type: table
+      - id: variables
+        type: header_variables
+  table:
+    seq:
+      - id: item_size
+        type: u2
+      - id: items
+        type: u2
+      - id: unknown
+        size: 2
+      - id: begin
+        type: u4
+  header_variables:
+    seq:
       - id: insertion_base
         type: point_3d
         doc: 0x005e-0x0075, $INSBASE/10|20|30
@@ -490,17 +504,6 @@ types:
         value: create_date_days + (create_date_ms / 86400000.0)
       update_date:
         value: update_date_days + (update_date_ms / 86400000.0)
-      ## TODO
-  table:
-    seq:
-      - id: item_size
-        type: u2
-      - id: items
-        type: u2
-      - id: unknown
-        size: 2
-      - id: begin
-        type: u4
   unknown_repeating:
     seq:
       - id: unknown_repeating1

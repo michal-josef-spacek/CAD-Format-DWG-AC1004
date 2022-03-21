@@ -2669,7 +2669,7 @@ sub _read {
     $self->{number_of_table_views} = $self->{_io}->read_s4le();
     $self->{view_table_begin} = $self->{_io}->read_u4le();
     $self->{insertion_base} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
-    $self->{number_of_entities} = $self->{_io}->read_s2le();
+    $self->{num_entities} = $self->{_io}->read_u2le();
     $self->{drawing_first} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{drawing_second} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{limits_min_x} = $self->{_io}->read_f8le();
@@ -2973,9 +2973,9 @@ sub insertion_base {
     return $self->{insertion_base};
 }
 
-sub number_of_entities {
+sub num_entities {
     my ($self) = @_;
-    return $self->{number_of_entities};
+    return $self->{num_entities};
 }
 
 sub drawing_first {

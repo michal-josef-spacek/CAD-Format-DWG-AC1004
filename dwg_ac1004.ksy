@@ -151,8 +151,8 @@ types:
       - id: insertion_base
         type: point_3d
         doc: 0x005e-0x0075, $INSBASE/10|20|30
-      - id: number_of_entities
-        type: s2
+      - id: num_entities
+        type: u2
         doc: 0x0076-0x0077
       - id: drawing_first
         type: point_3d

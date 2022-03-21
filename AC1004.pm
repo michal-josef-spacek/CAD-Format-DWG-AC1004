@@ -2374,11 +2374,11 @@ sub _read {
     $self->{start_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{height} = $self->{_io}->read_f8le();
     $self->{default_size} = $self->{_io}->read_s2le();
-    $self->{default} = $self->{_io}->read_bytes($self->default_size());
+    $self->{default} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->default_size()), 0, 0));
     $self->{prompt_size} = $self->{_io}->read_s2le();
-    $self->{prompt} = $self->{_io}->read_bytes($self->prompt_size());
+    $self->{prompt} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->prompt_size()), 0, 0));
     $self->{tag_size} = $self->{_io}->read_s2le();
-    $self->{tag} = $self->{_io}->read_bytes($self->tag_size());
+    $self->{tag} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->tag_size()), 0, 0));
     $self->{flags} = CAD::Format::DWG::AC1004::AttdefFlags->new($self->{_io}, $self, $self->{_root});
     if ($self->entity_common()->flag2_7()) {
         $self->{rotation_angle_in_radians} = $self->{_io}->read_f8le();
@@ -2782,8 +2782,8 @@ sub _read {
     $self->{dim_alternate_units_decimal_places} = $self->{_io}->read_s1();
     $self->{dim_associative} = $self->{_io}->read_s1();
     $self->{dim_sho} = $self->{_io}->read_s1();
-    $self->{dim_measurement_postfix} = Encode::decode("ASCII", $self->{_io}->read_bytes(16));
-    $self->{dim_alternate_measurement_postfix} = Encode::decode("ASCII", $self->{_io}->read_bytes(16));
+    $self->{dim_measurement_postfix} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(16), 0, 0));
+    $self->{dim_alternate_measurement_postfix} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(16), 0, 0));
     $self->{dim_alternate_units_multiplier} = $self->{_io}->read_f8le();
     $self->{dim_linear_measurements_scale_factor} = $self->{_io}->read_f8le();
     $self->{unknown31} = $self->{_io}->read_bytes(26);

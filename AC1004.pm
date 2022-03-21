@@ -44,6 +44,12 @@ our $ENTITIES_LINE3D = 21;
 our $ENTITIES_FACE3D = 22;
 our $ENTITIES_DIM = 23;
 
+our $TEXT_TYPE_CENTER = 1;
+our $TEXT_TYPE_END = 2;
+our $TEXT_TYPE_ALIGNED = 3;
+our $TEXT_TYPE_MIDDLE = 4;
+our $TEXT_TYPE_FIT = 5;
+
 our $ATTRIBUTES_FALSE = 0;
 our $ATTRIBUTES_NORMAL = 1;
 our $ATTRIBUTES_TRUE = 2;
@@ -1941,9 +1947,27 @@ sub _read {
     $self->{y} = $self->{_io}->read_f8le();
     $self->{height} = $self->{_io}->read_f8le();
     $self->{size} = $self->{_io}->read_s2le();
-    $self->{value} = $self->{_io}->read_bytes($self->size());
+    $self->{value} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes($self->size()), 0, 0));
     if ($self->entity_common()->flag2_8()) {
         $self->{angle} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_7()) {
+        $self->{width_factor} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_6()) {
+        $self->{obliquing_angle} = $self->{_io}->read_f8le();
+    }
+    if ($self->entity_common()->flag2_5()) {
+        $self->{style_index} = $self->{_io}->read_u1();
+    }
+    if ($self->entity_common()->flag2_4()) {
+        $self->{generation} = CAD::Format::DWG::AC1004::GenerationFlags->new($self->{_io}, $self, $self->{_root});
+    }
+    if ($self->entity_common()->flag2_3()) {
+        $self->{type} = $self->{_io}->read_u1();
+    }
+    if ($self->entity_common()->flag2_2()) {
+        $self->{aligned_to} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
 }
 
@@ -1980,6 +2004,116 @@ sub value {
 sub angle {
     my ($self) = @_;
     return $self->{angle};
+}
+
+sub width_factor {
+    my ($self) = @_;
+    return $self->{width_factor};
+}
+
+sub obliquing_angle {
+    my ($self) = @_;
+    return $self->{obliquing_angle};
+}
+
+sub style_index {
+    my ($self) = @_;
+    return $self->{style_index};
+}
+
+sub generation {
+    my ($self) = @_;
+    return $self->{generation};
+}
+
+sub type {
+    my ($self) = @_;
+    return $self->{type};
+}
+
+sub aligned_to {
+    my ($self) = @_;
+    return $self->{aligned_to};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1004::GenerationFlags;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{flag1} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag2} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag3} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag4} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag5} = $self->{_io}->read_bits_int_be(1);
+    $self->{upside_down} = $self->{_io}->read_bits_int_be(1);
+    $self->{backwards} = $self->{_io}->read_bits_int_be(1);
+    $self->{flag8} = $self->{_io}->read_bits_int_be(1);
+}
+
+sub flag1 {
+    my ($self) = @_;
+    return $self->{flag1};
+}
+
+sub flag2 {
+    my ($self) = @_;
+    return $self->{flag2};
+}
+
+sub flag3 {
+    my ($self) = @_;
+    return $self->{flag3};
+}
+
+sub flag4 {
+    my ($self) = @_;
+    return $self->{flag4};
+}
+
+sub flag5 {
+    my ($self) = @_;
+    return $self->{flag5};
+}
+
+sub upside_down {
+    my ($self) = @_;
+    return $self->{upside_down};
+}
+
+sub backwards {
+    my ($self) = @_;
+    return $self->{backwards};
+}
+
+sub flag8 {
+    my ($self) = @_;
+    return $self->{flag8};
 }
 
 ########################################################################

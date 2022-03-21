@@ -760,14 +760,10 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{from_x} = $self->{_io}->read_f8le();
-    $self->{from_y} = $self->{_io}->read_f8le();
-    $self->{from_and_x} = $self->{_io}->read_f8le();
-    $self->{from_and_y} = $self->{_io}->read_f8le();
-    $self->{to_x} = $self->{_io}->read_f8le();
-    $self->{to_y} = $self->{_io}->read_f8le();
-    $self->{to_and_x} = $self->{_io}->read_f8le();
-    $self->{to_and_y} = $self->{_io}->read_f8le();
+    $self->{from} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{from_and} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{to} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{to_and} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
 }
 
 sub entity_common {
@@ -775,44 +771,24 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub from_x {
+sub from {
     my ($self) = @_;
-    return $self->{from_x};
+    return $self->{from};
 }
 
-sub from_y {
+sub from_and {
     my ($self) = @_;
-    return $self->{from_y};
+    return $self->{from_and};
 }
 
-sub from_and_x {
+sub to {
     my ($self) = @_;
-    return $self->{from_and_x};
+    return $self->{to};
 }
 
-sub from_and_y {
+sub to_and {
     my ($self) = @_;
-    return $self->{from_and_y};
-}
-
-sub to_x {
-    my ($self) = @_;
-    return $self->{to_x};
-}
-
-sub to_y {
-    my ($self) = @_;
-    return $self->{to_y};
-}
-
-sub to_and_x {
-    my ($self) = @_;
-    return $self->{to_and_x};
-}
-
-sub to_and_y {
-    my ($self) = @_;
-    return $self->{to_and_y};
+    return $self->{to_and};
 }
 
 ########################################################################
@@ -1671,14 +1647,10 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{from_x} = $self->{_io}->read_f8le();
-    $self->{from_y} = $self->{_io}->read_f8le();
-    $self->{from_and_x} = $self->{_io}->read_f8le();
-    $self->{from_and_y} = $self->{_io}->read_f8le();
-    $self->{to_x} = $self->{_io}->read_f8le();
-    $self->{to_y} = $self->{_io}->read_f8le();
-    $self->{to_and_x} = $self->{_io}->read_f8le();
-    $self->{to_and_y} = $self->{_io}->read_f8le();
+    $self->{from} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{from_and} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{to} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{to_and} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
 }
 
 sub entity_common {
@@ -1686,44 +1658,24 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub from_x {
+sub from {
     my ($self) = @_;
-    return $self->{from_x};
+    return $self->{from};
 }
 
-sub from_y {
+sub from_and {
     my ($self) = @_;
-    return $self->{from_y};
+    return $self->{from_and};
 }
 
-sub from_and_x {
+sub to {
     my ($self) = @_;
-    return $self->{from_and_x};
+    return $self->{to};
 }
 
-sub from_and_y {
+sub to_and {
     my ($self) = @_;
-    return $self->{from_and_y};
-}
-
-sub to_x {
-    my ($self) = @_;
-    return $self->{to_x};
-}
-
-sub to_y {
-    my ($self) = @_;
-    return $self->{to_y};
-}
-
-sub to_and_x {
-    my ($self) = @_;
-    return $self->{to_and_x};
-}
-
-sub to_and_y {
-    my ($self) = @_;
-    return $self->{to_and_y};
+    return $self->{to_and};
 }
 
 ########################################################################
@@ -2061,8 +2013,7 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{start_point_x} = $self->{_io}->read_f8le();
-    $self->{start_point_y} = $self->{_io}->read_f8le();
+    $self->{start_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{height} = $self->{_io}->read_f8le();
     $self->{default_size} = $self->{_io}->read_s2le();
     $self->{default} = $self->{_io}->read_bytes($self->default_size());
@@ -2084,10 +2035,7 @@ sub _read {
         $self->{flags2} = CAD::Format::DWG::AC1004::AttdefFlags2->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_1()) {
-        $self->{end_point_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_1()) {
-        $self->{end_point_y} = $self->{_io}->read_f8le();
+        $self->{end_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
 }
 
@@ -2096,14 +2044,9 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub start_point_x {
+sub start_point {
     my ($self) = @_;
-    return $self->{start_point_x};
-}
-
-sub start_point_y {
-    my ($self) = @_;
-    return $self->{start_point_y};
+    return $self->{start_point};
 }
 
 sub height {
@@ -2166,14 +2109,9 @@ sub flags2 {
     return $self->{flags2};
 }
 
-sub end_point_x {
+sub end_point {
     my ($self) = @_;
-    return $self->{end_point_x};
-}
-
-sub end_point_y {
-    my ($self) = @_;
-    return $self->{end_point_y};
+    return $self->{end_point};
 }
 
 ########################################################################
@@ -2258,10 +2196,8 @@ sub _read {
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
     $self->{block_index} = $self->{_io}->read_s2le();
-    $self->{dimension_line_defining_point_x} = $self->{_io}->read_f8le();
-    $self->{dimension_line_defining_point_y} = $self->{_io}->read_f8le();
-    $self->{default_text_position_x} = $self->{_io}->read_f8le();
-    $self->{default_text_position_y} = $self->{_io}->read_f8le();
+    $self->{dimension_line_defining_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{default_text_position} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     if ($self->entity_common()->flag2_7()) {
         $self->{unknown1} = $self->{_io}->read_u1();
     }
@@ -2272,28 +2208,16 @@ sub _read {
         $self->{text} = $self->{_io}->read_bytes($self->text_size());
     }
     if ($self->entity_common()->flag2_5()) {
-        $self->{extension_defining_point1_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_5()) {
-        $self->{extension_defining_point1_y} = $self->{_io}->read_f8le();
+        $self->{extension_defining_point1} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_4()) {
-        $self->{extension_defining_point2_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_4()) {
-        $self->{extension_defining_point2_y} = $self->{_io}->read_f8le();
+        $self->{extension_defining_point2} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_3()) {
-        $self->{defining_point_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_3()) {
-        $self->{defining_point_y} = $self->{_io}->read_f8le();
+        $self->{defining_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_2()) {
-        $self->{dimension_line_arc_definition_point_x} = $self->{_io}->read_f8le();
-    }
-    if ($self->entity_common()->flag2_2()) {
-        $self->{dimension_line_arc_definition_point_y} = $self->{_io}->read_f8le();
+        $self->{dimension_line_arc_definition_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag3_8()) {
         $self->{rotation_in_radians} = $self->{_io}->read_f8le();
@@ -2310,24 +2234,14 @@ sub block_index {
     return $self->{block_index};
 }
 
-sub dimension_line_defining_point_x {
+sub dimension_line_defining_point {
     my ($self) = @_;
-    return $self->{dimension_line_defining_point_x};
+    return $self->{dimension_line_defining_point};
 }
 
-sub dimension_line_defining_point_y {
+sub default_text_position {
     my ($self) = @_;
-    return $self->{dimension_line_defining_point_y};
-}
-
-sub default_text_position_x {
-    my ($self) = @_;
-    return $self->{default_text_position_x};
-}
-
-sub default_text_position_y {
-    my ($self) = @_;
-    return $self->{default_text_position_y};
+    return $self->{default_text_position};
 }
 
 sub unknown1 {
@@ -2345,44 +2259,24 @@ sub text {
     return $self->{text};
 }
 
-sub extension_defining_point1_x {
+sub extension_defining_point1 {
     my ($self) = @_;
-    return $self->{extension_defining_point1_x};
+    return $self->{extension_defining_point1};
 }
 
-sub extension_defining_point1_y {
+sub extension_defining_point2 {
     my ($self) = @_;
-    return $self->{extension_defining_point1_y};
+    return $self->{extension_defining_point2};
 }
 
-sub extension_defining_point2_x {
+sub defining_point {
     my ($self) = @_;
-    return $self->{extension_defining_point2_x};
+    return $self->{defining_point};
 }
 
-sub extension_defining_point2_y {
+sub dimension_line_arc_definition_point {
     my ($self) = @_;
-    return $self->{extension_defining_point2_y};
-}
-
-sub defining_point_x {
-    my ($self) = @_;
-    return $self->{defining_point_x};
-}
-
-sub defining_point_y {
-    my ($self) = @_;
-    return $self->{defining_point_y};
-}
-
-sub dimension_line_arc_definition_point_x {
-    my ($self) = @_;
-    return $self->{dimension_line_arc_definition_point_x};
-}
-
-sub dimension_line_arc_definition_point_y {
-    my ($self) = @_;
-    return $self->{dimension_line_arc_definition_point_y};
+    return $self->{dimension_line_arc_definition_point};
 }
 
 sub rotation_in_radians {
@@ -2672,23 +2566,18 @@ sub _read {
     $self->{num_entities} = $self->{_io}->read_u2le();
     $self->{drawing_first} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{drawing_second} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
-    $self->{limits_min_x} = $self->{_io}->read_f8le();
-    $self->{limits_min_y} = $self->{_io}->read_f8le();
-    $self->{limits_max_x} = $self->{_io}->read_f8le();
-    $self->{limits_max_y} = $self->{_io}->read_f8le();
+    $self->{limits_min} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{limits_max} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{view_ctrl} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{view_size} = $self->{_io}->read_f8le();
     $self->{snap} = $self->{_io}->read_s2le();
-    $self->{snap_resolution_x} = $self->{_io}->read_f8le();
-    $self->{snap_resolution_y} = $self->{_io}->read_f8le();
-    $self->{snap_base_x} = $self->{_io}->read_f8le();
-    $self->{snap_base_y} = $self->{_io}->read_f8le();
+    $self->{snap_resolution} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
+    $self->{snap_base} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{snap_angle} = $self->{_io}->read_f8le();
     $self->{snap_style} = $self->{_io}->read_s2le();
     $self->{snap_iso_pair} = $self->{_io}->read_s2le();
     $self->{grid} = $self->{_io}->read_s2le();
-    $self->{grid_unit_x} = $self->{_io}->read_f8le();
-    $self->{grid_unit_y} = $self->{_io}->read_f8le();
+    $self->{grid_unit} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{ortho} = $self->{_io}->read_s2le();
     $self->{regen} = $self->{_io}->read_s2le();
     $self->{fill} = $self->{_io}->read_s2le();
@@ -2707,8 +2596,7 @@ sub _read {
     $self->{linear_units_format} = $self->{_io}->read_s2le();
     $self->{linear_units_precision} = $self->{_io}->read_s2le();
     $self->{axis} = $self->{_io}->read_s2le();
-    $self->{axis_value_x} = $self->{_io}->read_f8le();
-    $self->{axis_value_y} = $self->{_io}->read_f8le();
+    $self->{axis_value} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{sketch_increment} = $self->{_io}->read_f8le();
     $self->{fillet_radius} = $self->{_io}->read_f8le();
     $self->{units_for_angles} = $self->{_io}->read_s2le();
@@ -2988,24 +2876,14 @@ sub drawing_second {
     return $self->{drawing_second};
 }
 
-sub limits_min_x {
+sub limits_min {
     my ($self) = @_;
-    return $self->{limits_min_x};
+    return $self->{limits_min};
 }
 
-sub limits_min_y {
+sub limits_max {
     my ($self) = @_;
-    return $self->{limits_min_y};
-}
-
-sub limits_max_x {
-    my ($self) = @_;
-    return $self->{limits_max_x};
-}
-
-sub limits_max_y {
-    my ($self) = @_;
-    return $self->{limits_max_y};
+    return $self->{limits_max};
 }
 
 sub view_ctrl {
@@ -3023,24 +2901,14 @@ sub snap {
     return $self->{snap};
 }
 
-sub snap_resolution_x {
+sub snap_resolution {
     my ($self) = @_;
-    return $self->{snap_resolution_x};
+    return $self->{snap_resolution};
 }
 
-sub snap_resolution_y {
+sub snap_base {
     my ($self) = @_;
-    return $self->{snap_resolution_y};
-}
-
-sub snap_base_x {
-    my ($self) = @_;
-    return $self->{snap_base_x};
-}
-
-sub snap_base_y {
-    my ($self) = @_;
-    return $self->{snap_base_y};
+    return $self->{snap_base};
 }
 
 sub snap_angle {
@@ -3063,14 +2931,9 @@ sub grid {
     return $self->{grid};
 }
 
-sub grid_unit_x {
+sub grid_unit {
     my ($self) = @_;
-    return $self->{grid_unit_x};
-}
-
-sub grid_unit_y {
-    my ($self) = @_;
-    return $self->{grid_unit_y};
+    return $self->{grid_unit};
 }
 
 sub ortho {
@@ -3163,14 +3026,9 @@ sub axis {
     return $self->{axis};
 }
 
-sub axis_value_x {
+sub axis_value {
     my ($self) = @_;
-    return $self->{axis_value_x};
-}
-
-sub axis_value_y {
-    my ($self) = @_;
-    return $self->{axis_value_y};
+    return $self->{axis_value};
 }
 
 sub sketch_increment {
@@ -4148,8 +4006,7 @@ sub _read {
     $self->{view_name} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(31), 0, 0));
     $self->{u2} = $self->{_io}->read_u1();
     $self->{view_size} = $self->{_io}->read_f8le();
-    $self->{center_point_x} = $self->{_io}->read_f8le();
-    $self->{center_point_y} = $self->{_io}->read_f8le();
+    $self->{center_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{view_width} = $self->{_io}->read_f8le();
     $self->{view_dir} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
 }
@@ -4174,14 +4031,9 @@ sub view_size {
     return $self->{view_size};
 }
 
-sub center_point_x {
+sub center_point {
     my ($self) = @_;
-    return $self->{center_point_x};
-}
-
-sub center_point_y {
-    my ($self) = @_;
-    return $self->{center_point_y};
+    return $self->{center_point};
 }
 
 sub view_width {

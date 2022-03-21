@@ -23,23 +23,23 @@ seq:
   - id: blocks
     type: block
     repeat: expr
-    repeat-expr: header.number_of_table_blocks
+    repeat-expr: header.table_block.items
   - id: layers
     type: layer
     repeat: expr
-    repeat-expr: header.number_of_table_layers
+    repeat-expr: header.table_layer.items
   - id: styles
     type: style
     repeat: expr
-    repeat-expr: header.number_of_table_styles
+    repeat-expr: header.table_style.items
   - id: linetypes
     type: linetype
     repeat: expr
-    repeat-expr: header.number_of_table_linetypes
+    repeat-expr: header.table_linetype.items
   - id: views
     type: view
     repeat: expr
-    repeat-expr: header.number_of_table_views
+    repeat-expr: header.table_view.items
   - id: block_entities
     type: real_entities
     size: header.blocks_end - header.blocks_start
@@ -118,36 +118,16 @@ types:
         size: 2
       - id: unknown4c
         size: 2
-      - id: block_table_item_size
-        type: s2
-      - id: number_of_table_blocks
-        type: s4
-      - id: block_table_begin
-        type: u4
-      - id: layer_table_item_size
-        type: s2
-      - id: number_of_table_layers
-        type: s4
-      - id: layer_table_begin
-        type: u4
-      - id: style_table_item_size
-        type: s2
-      - id: number_of_table_styles
-        type: s4
-      - id: style_table_begin
-        type: u4
-      - id: linetype_table_item_size
-        type: s2
-      - id: number_of_table_linetypes
-        type: s4
-      - id: linetype_table_begin
-        type: u4
-      - id: view_table_item_size
-        type: s2
-      - id: number_of_table_views
-        type: s4
-      - id: view_table_begin
-        type: u4
+      - id: table_block
+        type: table
+      - id: table_layer
+        type: table
+      - id: table_style
+        type: table
+      - id: table_linetype
+        type: table
+      - id: table_view
+        type: table
       - id: insertion_base
         type: point_3d
         doc: 0x005e-0x0075, $INSBASE/10|20|30
@@ -544,6 +524,16 @@ types:
       update_date:
         value: update_date_days + (update_date_ms / 86400000.0)
       ## TODO
+  table:
+    seq:
+      - id: item_size
+        type: u2
+      - id: items
+        type: u2
+      - id: unknown
+        size: 2
+      - id: begin
+        type: u4
   entity:
     seq:
       - id: entity_type

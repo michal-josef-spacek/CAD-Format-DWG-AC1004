@@ -2860,8 +2860,7 @@ sub _read {
     $self->{unknown27} = $self->{_io}->read_f8le();
     $self->{unknown28} = $self->{_io}->read_f8le();
     $self->{unknown29} = $self->{_io}->read_bytes(2);
-    $self->{blip} = $self->{_io}->read_s1();
-    $self->{unknown29a} = $self->{_io}->read_bytes(1);
+    $self->{blip} = $self->{_io}->read_s2le();
     $self->{dim_suppression_of_zeros} = $self->{_io}->read_s1();
     $self->{dim_rounding} = $self->{_io}->read_f8le();
     $self->{dim_extension_line_extend2} = $self->{_io}->read_f8le();
@@ -3493,11 +3492,6 @@ sub unknown29 {
 sub blip {
     my ($self) = @_;
     return $self->{blip};
-}
-
-sub unknown29a {
-    my ($self) = @_;
-    return $self->{unknown29a};
 }
 
 sub dim_suppression_of_zeros {

@@ -585,6 +585,7 @@ types:
           cases:
             'entities::arc': entity_arc
             'entities::attdef': entity_attdef
+            'entities::attrib': entity_attrib
             'entities::block_begin': entity_block_begin
             'entities::block_end': entity_block_end
             'entities::insert' : entity_insert
@@ -748,6 +749,46 @@ types:
         type: f8
         if: entity_common.flag2_1
         doc: ATTDEF/21
+  entity_attrib:
+    seq:
+      - id: entity_common
+        type: entity_common
+      - id: u1
+        type: f8
+        doc: ATTRIB/10
+      - id: u2
+        type: f8
+        doc: ATTRIB/20
+      - id: u3
+        type: f8
+        doc: ATRRIB/40
+      - id: size
+        type: s2
+      - id: text
+        size: size
+        doc: ATRRIB/1
+      - id: size2
+        type: s2
+      - id: text2
+        size: size2
+        doc: ATRRIB/2
+      - id: u4
+        type: u1
+      - id: u5
+        type: f8
+        if: entity_common.flag2_7
+        doc: ATRRIB/50
+      - id: u6
+        type: u1
+        if: entity_common.flag2_4
+      - id: u7
+        type: u1
+        if: entity_common.flag2_2
+        # 1, 2 nebo 7?
+      - id: aligned_to
+        type: point_2d
+        if: entity_common.flag2_1
+        doc: ATTRIB/11|21
   entity_block_begin:
     seq:
       - id: entity_common
@@ -1285,6 +1326,12 @@ types:
       - id: view_dir_z
         type: f8
         doc: VIEW/31
+  point_2d:
+    seq:
+      - id: x
+        type: f8
+      - id: y
+        type: f8
 enums:
   entities:
     1: line
@@ -1302,7 +1349,7 @@ enums:
     13: block_end
     14: insert
     15: attdef
-    # 16 TODO attrib
+    16: attrib
     17: seqend
     18: polyline
     19: polyline2

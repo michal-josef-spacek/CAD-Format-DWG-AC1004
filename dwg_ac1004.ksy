@@ -1217,8 +1217,6 @@ types:
       - id: pattern
         type: pattern
         doc: LTYPE/49
-      - id: unknown
-        type: s1
   pattern:
     seq:
       - id: pattern1
@@ -1238,6 +1236,12 @@ types:
       - id: pattern8
         type: f8
       - id: pattern9
+        type: f8
+      - id: pattern10
+        type: f8
+      - id: pattern11
+        type: f8
+      - id: pattern12
         type: f8
   linetype_flag:
     seq:

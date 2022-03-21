@@ -654,6 +654,9 @@ sub _read {
     $self->{pattern7} = $self->{_io}->read_f8le();
     $self->{pattern8} = $self->{_io}->read_f8le();
     $self->{pattern9} = $self->{_io}->read_f8le();
+    $self->{pattern10} = $self->{_io}->read_f8le();
+    $self->{pattern11} = $self->{_io}->read_f8le();
+    $self->{pattern12} = $self->{_io}->read_f8le();
 }
 
 sub pattern1 {
@@ -699,6 +702,21 @@ sub pattern8 {
 sub pattern9 {
     my ($self) = @_;
     return $self->{pattern9};
+}
+
+sub pattern10 {
+    my ($self) = @_;
+    return $self->{pattern10};
+}
+
+sub pattern11 {
+    my ($self) = @_;
+    return $self->{pattern11};
+}
+
+sub pattern12 {
+    my ($self) = @_;
+    return $self->{pattern12};
 }
 
 ########################################################################
@@ -1309,7 +1327,6 @@ sub _read {
     $self->{num_dashes} = $self->{_io}->read_u1();
     $self->{pattern_len} = $self->{_io}->read_f8le();
     $self->{pattern} = CAD::Format::DWG::AC1004::Pattern->new($self->{_io}, $self, $self->{_root});
-    $self->{unknown} = $self->{_io}->read_s1();
 }
 
 sub flag {
@@ -1345,11 +1362,6 @@ sub pattern_len {
 sub pattern {
     my ($self) = @_;
     return $self->{pattern};
-}
-
-sub unknown {
-    my ($self) = @_;
-    return $self->{unknown};
 }
 
 ########################################################################

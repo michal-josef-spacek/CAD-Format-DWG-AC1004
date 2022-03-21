@@ -4483,7 +4483,6 @@ sub _read {
     $self->{view_width} = $self->{_io}->read_f8le();
     $self->{view_dir} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{u3} = $self->{_io}->read_s2le();
-    $self->{u4} = $self->{_io}->read_u1();
 }
 
 sub flag {
@@ -4519,11 +4518,6 @@ sub view_dir {
 sub u3 {
     my ($self) = @_;
     return $self->{u3};
-}
-
-sub u4 {
-    my ($self) = @_;
-    return $self->{u4};
 }
 
 1;

@@ -3,7 +3,9 @@ TODO
 1. Update style from 2.10
 2. convert.sh to Makefile.PL
 3. Update layer_flag from 2.10
-4.
+4. Rewrite to point_2d
+5. Rewrite to point_3d
+6.
 
 Applied
 =======

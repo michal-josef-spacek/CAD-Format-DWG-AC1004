@@ -2843,12 +2843,12 @@ sub _read {
     $self->{dim_alternate_units_multiplier} = $self->{_io}->read_f8le();
     $self->{dim_linear_measurements_scale_factor} = $self->{_io}->read_f8le();
     $self->{spline_segs} = $self->{_io}->read_s2le();
-    $self->{spline_frame} = $self->{_io}->read_s1();
-    $self->{unknown31a} = $self->{_io}->read_s1();
-    $self->{unknown31b} = $self->{_io}->read_s1();
-    $self->{unknown31c} = $self->{_io}->read_bytes(19);
-    $self->{mirror_text} = $self->{_io}->read_s1();
-    $self->{unknown31d} = $self->{_io}->read_s1();
+    $self->{spline_frame} = $self->{_io}->read_s2le();
+    $self->{unknown31b} = $self->{_io}->read_s2le();
+    $self->{unknown31c} = $self->{_io}->read_s2le();
+    $self->{chamfera} = $self->{_io}->read_f8le();
+    $self->{chamferb} = $self->{_io}->read_f8le();
+    $self->{mirror_text} = $self->{_io}->read_s2le();
 }
 
 sub create_date {
@@ -3445,11 +3445,6 @@ sub spline_frame {
     return $self->{spline_frame};
 }
 
-sub unknown31a {
-    my ($self) = @_;
-    return $self->{unknown31a};
-}
-
 sub unknown31b {
     my ($self) = @_;
     return $self->{unknown31b};
@@ -3460,14 +3455,19 @@ sub unknown31c {
     return $self->{unknown31c};
 }
 
+sub chamfera {
+    my ($self) = @_;
+    return $self->{chamfera};
+}
+
+sub chamferb {
+    my ($self) = @_;
+    return $self->{chamferb};
+}
+
 sub mirror_text {
     my ($self) = @_;
     return $self->{mirror_text};
-}
-
-sub unknown31d {
-    my ($self) = @_;
-    return $self->{unknown31d};
 }
 
 ########################################################################

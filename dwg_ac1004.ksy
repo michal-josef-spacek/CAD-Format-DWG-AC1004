@@ -505,21 +505,23 @@ types:
         doc: 0x03cd-0x03d4, $DIMLFAC
       - id: spline_segs
         type: s2
-        doc: 0x03d5-0x03d6, $SPLINESEGS, TODO
+        doc: 0x03d5-0x03d6, $SPLINESEGS
       - id: spline_frame
-        type: s1
-        doc: 0x03d7, $SPLFRAME, TODO
-      - id: unknown31a
-        type: s1
+        type: s2
+        doc: 0x03d7-0x03d8, $SPLFRAME
       - id: unknown31b
-        type: s1
+        type: s2
       - id: unknown31c
-        size: 19
+        type: s2
+      - id: chamfera
+        type: f8
+        doc: $CHAMFERA/40
+      - id: chamferb
+        type: f8
+        doc: $CHAMFERB/40
       - id: mirror_text
-        type: s1
-        doc: 0x03ed, $MIRRTEXT, TODO
-      - id: unknown31d
-        type: s1
+        type: s2
+        doc: 0x03ed-0x03ee, $MIRRTEXT
     instances:
       create_date:
         value: create_date_days + (create_date_ms / 86400000.0)

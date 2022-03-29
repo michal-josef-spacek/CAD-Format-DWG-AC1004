@@ -2844,8 +2844,8 @@ sub _read {
     $self->{dim_linear_measurements_scale_factor} = $self->{_io}->read_f8le();
     $self->{spline_segs} = $self->{_io}->read_s2le();
     $self->{spline_frame} = $self->{_io}->read_s2le();
-    $self->{unknown31b} = $self->{_io}->read_s2le();
-    $self->{unknown31c} = $self->{_io}->read_s2le();
+    $self->{attreq} = $self->{_io}->read_u2le();
+    $self->{attdia} = $self->{_io}->read_u2le();
     $self->{chamfera} = $self->{_io}->read_f8le();
     $self->{chamferb} = $self->{_io}->read_f8le();
     $self->{mirror_text} = $self->{_io}->read_s2le();
@@ -3445,14 +3445,14 @@ sub spline_frame {
     return $self->{spline_frame};
 }
 
-sub unknown31b {
+sub attreq {
     my ($self) = @_;
-    return $self->{unknown31b};
+    return $self->{attreq};
 }
 
-sub unknown31c {
+sub attdia {
     my ($self) = @_;
-    return $self->{unknown31c};
+    return $self->{attdia};
 }
 
 sub chamfera {

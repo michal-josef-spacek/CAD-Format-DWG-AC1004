@@ -517,10 +517,10 @@ types:
         doc: 0x03db-0x03dc, $ATTDIA
       - id: chamfera
         type: f8
-        doc: $CHAMFERA/40
+        doc: 0x03dd-0x04e4, $CHAMFERA/40
       - id: chamferb
         type: f8
-        doc: $CHAMFERB/40
+        doc: 0x04e5-0x04ec, $CHAMFERB/40
       - id: mirror_text
         type: s2
         doc: 0x03ed-0x03ee, $MIRRTEXT

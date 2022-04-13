@@ -3003,8 +3003,7 @@ sub _read {
     $self->{dim_suppression_of_zeros} = $self->{_io}->read_s1();
     $self->{dim_rounding} = $self->{_io}->read_f8le();
     $self->{dim_extension_line_extend2} = $self->{_io}->read_f8le();
-    $self->{dim_arrowhead_block} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(32), 0, 0));
-    $self->{unknown30} = $self->{_io}->read_s1();
+    $self->{dim_arrowhead_block} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(33), 0, 0));
     $self->{circle_zoom_percent} = $self->{_io}->read_s2le();
     $self->{coordinates} = $self->{_io}->read_s2le();
     $self->{current_color} = $self->{_io}->read_s2le();
@@ -3530,11 +3529,6 @@ sub dim_extension_line_extend2 {
 sub dim_arrowhead_block {
     my ($self) = @_;
     return $self->{dim_arrowhead_block};
-}
-
-sub unknown30 {
-    my ($self) = @_;
-    return $self->{unknown30};
 }
 
 sub circle_zoom_percent {

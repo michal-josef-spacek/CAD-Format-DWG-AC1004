@@ -410,13 +410,11 @@ types:
         type: f8
         doc: 0x02ee-0x02f5, $DIMDLE
       - id: dim_arrowhead_block
-        size: 32
+        size: 33
         type: str
         encoding: ASCII
         terminator: 0x00
         doc: $DIMBLK
-      - id: unknown30
-        type: s1
       - id: circle_zoom_percent
         type: s2
         doc: 0x0317-0x0318

@@ -797,6 +797,24 @@ types:
         type: point_2d
         if: entity_common.flag2_1
         doc: ATTDEF/11|21
+  attdef_flags:
+    seq:
+      - id: flag_1
+        type: b1
+      - id: flag_2
+        type: b1
+      - id: flag_3
+        type: b1
+      - id: flag_4
+        type: b1
+      - id: flag_5
+        type: b1
+      - id: invisible
+        type: b1
+      - id: constant
+        type: b1
+      - id: verify
+        type: b1
   entity_attrib:
     seq:
       - id: entity_common
@@ -1219,24 +1237,6 @@ types:
         type: f8
         if: entity_common.flag2_4
         doc: VERTEX/50
-  attdef_flags:
-    seq:
-      - id: flag_1
-        type: b1
-      - id: flag_2
-        type: b1
-      - id: flag_3
-        type: b1
-      - id: flag_4
-        type: b1
-      - id: flag_5
-        type: b1
-      - id: invisible
-        type: b1
-      - id: constant
-        type: b1
-      - id: verify
-        type: b1
   attdef_flags2:
     seq:
 ## TODO Tohle je divne

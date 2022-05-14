@@ -847,9 +847,22 @@ types:
         type: f8
         if: entity_common.flag2_7
         doc: ATTRIB/50
-      - id: u1
+      - id: width_scale_factor
+        type: f8
+        if: entity_common.flag2_6
+        doc: ATTRIB/41
+      - id: obliquing_angle_in_radians
+        type: f8
+        if: entity_common.flag2_5
+        doc: ATTRIB/51
+      - id: text_style_index
         type: u1
         if: entity_common.flag2_4
+        doc: ATTRIB/7
+      - id: generation
+        type: generation_flags
+        if: entity_common.flag2_3
+        doc: ATTRIB/71
       - id: horiz_text_justification_type
         type: u1
         enum: text_type

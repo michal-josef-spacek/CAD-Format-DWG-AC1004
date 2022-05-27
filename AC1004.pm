@@ -2837,8 +2837,7 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{x} = $self->{_io}->read_f8le();
-    $self->{y} = $self->{_io}->read_f8le();
+    $self->{insert_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
 }
 
 sub entity_common {
@@ -2846,14 +2845,9 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub x {
+sub insert_point {
     my ($self) = @_;
-    return $self->{x};
-}
-
-sub y {
-    my ($self) = @_;
-    return $self->{y};
+    return $self->{insert_point};
 }
 
 ########################################################################

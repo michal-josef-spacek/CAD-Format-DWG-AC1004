@@ -4301,8 +4301,7 @@ sub _read {
     my ($self) = @_;
 
     $self->{entity_common} = CAD::Format::DWG::AC1004::EntityCommon->new($self->{_io}, $self, $self->{_root});
-    $self->{x} = $self->{_io}->read_f8le();
-    $self->{y} = $self->{_io}->read_f8le();
+    $self->{center_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
     $self->{radius} = $self->{_io}->read_f8le();
 }
 
@@ -4311,14 +4310,9 @@ sub entity_common {
     return $self->{entity_common};
 }
 
-sub x {
+sub center_point {
     my ($self) = @_;
-    return $self->{x};
-}
-
-sub y {
-    my ($self) = @_;
-    return $self->{y};
+    return $self->{center_point};
 }
 
 sub radius {

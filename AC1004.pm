@@ -130,27 +130,27 @@ sub _read {
     $self->{blocks} = ();
     my $n_blocks = $self->header()->table_block()->items();
     for (my $i = 0; $i < $n_blocks; $i++) {
-        $self->{blocks}[$i] = CAD::Format::DWG::AC1004::Block->new($self->{_io}, $self, $self->{_root});
+        push @{$self->{blocks}}, CAD::Format::DWG::AC1004::Block->new($self->{_io}, $self, $self->{_root});
     }
     $self->{layers} = ();
     my $n_layers = $self->header()->table_layer()->items();
     for (my $i = 0; $i < $n_layers; $i++) {
-        $self->{layers}[$i] = CAD::Format::DWG::AC1004::Layer->new($self->{_io}, $self, $self->{_root});
+        push @{$self->{layers}}, CAD::Format::DWG::AC1004::Layer->new($self->{_io}, $self, $self->{_root});
     }
     $self->{styles} = ();
     my $n_styles = $self->header()->table_style()->items();
     for (my $i = 0; $i < $n_styles; $i++) {
-        $self->{styles}[$i] = CAD::Format::DWG::AC1004::Style->new($self->{_io}, $self, $self->{_root});
+        push @{$self->{styles}}, CAD::Format::DWG::AC1004::Style->new($self->{_io}, $self, $self->{_root});
     }
     $self->{linetypes} = ();
     my $n_linetypes = $self->header()->table_linetype()->items();
     for (my $i = 0; $i < $n_linetypes; $i++) {
-        $self->{linetypes}[$i] = CAD::Format::DWG::AC1004::Linetype->new($self->{_io}, $self, $self->{_root});
+        push @{$self->{linetypes}}, CAD::Format::DWG::AC1004::Linetype->new($self->{_io}, $self, $self->{_root});
     }
     $self->{views} = ();
     my $n_views = $self->header()->table_view()->items();
     for (my $i = 0; $i < $n_views; $i++) {
-        $self->{views}[$i] = CAD::Format::DWG::AC1004::View->new($self->{_io}, $self, $self->{_root});
+        push @{$self->{views}}, CAD::Format::DWG::AC1004::View->new($self->{_io}, $self, $self->{_root});
     }
     $self->{_raw_block_entities} = $self->{_io}->read_bytes($self->header()->blocks_size());
     my $io__raw_block_entities = IO::KaitaiStruct::Stream->new($self->{_raw_block_entities});

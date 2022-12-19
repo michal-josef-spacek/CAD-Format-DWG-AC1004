@@ -48,12 +48,12 @@ our $ISO_PLANE_LEFT = 0;
 our $ISO_PLANE_TOP = 1;
 our $ISO_PLANE_RIGHT = 2;
 
-our $TEXT_TYPE_LEFT = 0;
-our $TEXT_TYPE_CENTER = 1;
-our $TEXT_TYPE_RIGHT = 2;
-our $TEXT_TYPE_ALIGNED = 3;
-our $TEXT_TYPE_MIDDLE = 4;
-our $TEXT_TYPE_FIT = 5;
+our $HORIZ_ALIGNMENT_LEFT = 0;
+our $HORIZ_ALIGNMENT_CENTER = 1;
+our $HORIZ_ALIGNMENT_RIGHT = 2;
+our $HORIZ_ALIGNMENT_ALIGNED = 3;
+our $HORIZ_ALIGNMENT_MIDDLE = 4;
+our $HORIZ_ALIGNMENT_FIT = 5;
 
 our $ATTRIBUTES_FALSE = 0;
 our $ATTRIBUTES_NORMAL = 1;
@@ -272,7 +272,7 @@ sub _read {
         $self->{generation} = CAD::Format::DWG::AC1004::GenerationFlags->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_2()) {
-        $self->{horiz_text_justification_type} = $self->{_io}->read_u1();
+        $self->{horiz_alignment} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_1()) {
         $self->{aligned_to} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -344,9 +344,9 @@ sub generation {
     return $self->{generation};
 }
 
-sub horiz_text_justification_type {
+sub horiz_alignment {
     my ($self) = @_;
-    return $self->{horiz_text_justification_type};
+    return $self->{horiz_alignment};
 }
 
 sub aligned_to {
@@ -2521,7 +2521,7 @@ sub _read {
         $self->{generation} = CAD::Format::DWG::AC1004::GenerationFlags->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_3()) {
-        $self->{type} = $self->{_io}->read_u1();
+        $self->{horiz_alignment} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_2()) {
         $self->{aligned_to} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -2578,9 +2578,9 @@ sub generation {
     return $self->{generation};
 }
 
-sub type {
+sub horiz_alignment {
     my ($self) = @_;
-    return $self->{type};
+    return $self->{horiz_alignment};
 }
 
 sub aligned_to {
@@ -2724,7 +2724,7 @@ sub _read {
         $self->{generation} = CAD::Format::DWG::AC1004::GenerationFlags->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_2()) {
-        $self->{text_type} = $self->{_io}->read_u1();
+        $self->{horiz_alignment} = $self->{_io}->read_u1();
     }
     if ($self->entity_common()->flag2_1()) {
         $self->{end_point} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -2806,9 +2806,9 @@ sub generation {
     return $self->{generation};
 }
 
-sub text_type {
+sub horiz_alignment {
     my ($self) = @_;
-    return $self->{text_type};
+    return $self->{horiz_alignment};
 }
 
 sub end_point {

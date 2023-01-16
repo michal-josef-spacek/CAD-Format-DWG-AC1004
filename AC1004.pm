@@ -2898,10 +2898,10 @@ sub _read {
         $self->{dim_type} = CAD::Format::DWG::AC1004::DimType->new($self->{_io}, $self, $self->{_root});
     }
     if ($self->entity_common()->flag2_6()) {
-        $self->{text_size} = $self->{_io}->read_s2le();
+        $self->{len_text} = $self->{_io}->read_s2le();
     }
     if ($self->entity_common()->flag2_6()) {
-        $self->{text} = $self->{_io}->read_bytes($self->text_size());
+        $self->{text} = $self->{_io}->read_bytes($self->len_text());
     }
     if ($self->entity_common()->flag2_5()) {
         $self->{extension_defining_point1} = CAD::Format::DWG::AC1004::Point2d->new($self->{_io}, $self, $self->{_root});
@@ -2945,9 +2945,9 @@ sub dim_type {
     return $self->{dim_type};
 }
 
-sub text_size {
+sub len_text {
     my ($self) = @_;
-    return $self->{text_size};
+    return $self->{len_text};
 }
 
 sub text {
@@ -3032,7 +3032,7 @@ sub _read {
     $self->{qtext} = $self->{_io}->read_s2le();
     $self->{drag} = $self->{_io}->read_s2le();
     $self->{linetype_scale} = $self->{_io}->read_f8le();
-    $self->{text_size} = $self->{_io}->read_f8le();
+    $self->{len_text} = $self->{_io}->read_f8le();
     $self->{trace_width} = $self->{_io}->read_f8le();
     $self->{current_layer_index} = $self->{_io}->read_s2le();
     $self->{current_color_convert} = $self->{_io}->read_f8le();
@@ -3275,9 +3275,9 @@ sub linetype_scale {
     return $self->{linetype_scale};
 }
 
-sub text_size {
+sub len_text {
     my ($self) = @_;
-    return $self->{text_size};
+    return $self->{len_text};
 }
 
 sub trace_width {

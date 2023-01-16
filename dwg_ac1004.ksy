@@ -212,7 +212,7 @@ types:
       - id: linetype_scale
         type: f8
         doc: 0x0132-0x0139, $LTSCALE
-      - id: text_size
+      - id: len_text
         type: f8
         doc: 0x013a-0x0141, $TEXTSIZE
       - id: trace_width
@@ -978,11 +978,11 @@ types:
         type: dim_type
         if: entity_common.flag2_7
         doc: DIMENSION/70
-      - id: text_size
+      - id: len_text
         type: s2
         if: entity_common.flag2_6
       - id: text
-        size: text_size
+        size: len_text
         if: entity_common.flag2_6
         doc: DIMENSION/1
       - id: extension_defining_point1

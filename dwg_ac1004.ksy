@@ -212,7 +212,7 @@ types:
       - id: linetype_scale
         type: f8
         doc: 0x0132-0x0139, $LTSCALE
-      - id: len_text
+      - id: text_size
         type: f8
         doc: 0x013a-0x0141, $TEXTSIZE
       - id: trace_width

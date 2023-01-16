@@ -3549,7 +3549,7 @@ sub _read {
     $self->{qtext} = $self->{_io}->read_s2le();
     $self->{drag} = $self->{_io}->read_s2le();
     $self->{linetype_scale} = $self->{_io}->read_f8le();
-    $self->{len_text} = $self->{_io}->read_f8le();
+    $self->{text_size} = $self->{_io}->read_f8le();
     $self->{trace_width} = $self->{_io}->read_f8le();
     $self->{current_layer_index} = $self->{_io}->read_s2le();
     $self->{current_color_convert} = $self->{_io}->read_f8le();
@@ -3792,9 +3792,9 @@ sub linetype_scale {
     return $self->{linetype_scale};
 }
 
-sub len_text {
+sub text_size {
     my ($self) = @_;
-    return $self->{len_text};
+    return $self->{text_size};
 }
 
 sub trace_width {

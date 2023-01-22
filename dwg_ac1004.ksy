@@ -403,7 +403,7 @@ types:
         type: point_3d
       - id: view_point_z_alt
         type: point_3d
-      - id: unknown29
+      - id: flag_3d
         type: s2
         doc: 0x02e1-0x02e2
       - id: blip

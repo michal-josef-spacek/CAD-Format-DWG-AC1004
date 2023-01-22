@@ -3619,7 +3619,7 @@ sub _read {
     $self->{view_point_x_alt} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{view_point_y_alt} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
     $self->{view_point_z_alt} = CAD::Format::DWG::AC1004::Point3d->new($self->{_io}, $self, $self->{_root});
-    $self->{unknown29} = $self->{_io}->read_s2le();
+    $self->{flag_3d} = $self->{_io}->read_s2le();
     $self->{blip} = $self->{_io}->read_s2le();
     $self->{dim_suppression_of_zeros} = $self->{_io}->read_s1();
     $self->{dim_rounding} = $self->{_io}->read_f8le();
@@ -4147,9 +4147,9 @@ sub view_point_z_alt {
     return $self->{view_point_z_alt};
 }
 
-sub unknown29 {
+sub flag_3d {
     my ($self) = @_;
-    return $self->{unknown29};
+    return $self->{flag_3d};
 }
 
 sub blip {

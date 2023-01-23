@@ -3557,7 +3557,7 @@ sub _read {
     $self->{unknown7b} = $self->{_io}->read_bytes(2);
     $self->{unknown7c} = $self->{_io}->read_bytes(2);
     $self->{unknown7d} = $self->{_io}->read_bytes(2);
-    $self->{unknown8} = $self->{_io}->read_f8le();
+    $self->{aspect_ratio} = $self->{_io}->read_f8le();
     $self->{linear_units_format} = $self->{_io}->read_s2le();
     $self->{linear_units_precision} = $self->{_io}->read_s2le();
     $self->{axis} = $self->{_io}->read_s2le();
@@ -3837,9 +3837,9 @@ sub unknown7d {
     return $self->{unknown7d};
 }
 
-sub unknown8 {
+sub aspect_ratio {
     my ($self) = @_;
-    return $self->{unknown8};
+    return $self->{aspect_ratio};
 }
 
 sub linear_units_format {

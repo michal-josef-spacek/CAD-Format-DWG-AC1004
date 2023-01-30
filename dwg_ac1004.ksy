@@ -269,7 +269,7 @@ types:
       - id: attributes
         enum: attributes
         type: s2
-        doc: 0x0192-0x0193, $ATTMODE
+        doc: 0x0192-0x0193, $ATTMODE/70
       - id: menu
         size: 15
         type: str
@@ -458,97 +458,97 @@ types:
         doc: $TDUSRTIMER/ms
       - id: user_timer
         type: s2
-        doc: 0x033f-0x0340, $USRTIMER
+        doc: 0x033f-0x0340, $USRTIMER/70
       - id: fast_zoom
         type: u2
         doc: 0x0341-0x0342, $FASTZOOM
       - id: sketch_type
         type: u2
-        doc: 0x0343-0x0344, $SKPOLY
+        doc: 0x0343-0x0344, $SKPOLY/70
       - id: unknown_date
         type: unknown_date
       - id: angle_base
         type: f8
-        doc: 0x0353-0x035a, $ANGBASE
+        doc: 0x0353-0x035a, $ANGBASE/50
       - id: angle_direction
         enum: angle_direction
         type: s2
-        doc: 0x035b-0x035c, $ANGDIR
+        doc: 0x035b-0x035c, $ANGDIR/70
       - id: point_mode
         type: s2
-        doc: 0x035d-0x035e, $PDMODE
+        doc: 0x035d-0x035e, $PDMODE/70
       - id: point_size
         type: f8
-        doc: $PDSIZE
+        doc: $PDSIZE/40
       - id: polyline_width
         type: f8
-        doc: $PLINEWID
+        doc: $PLINEWID/40
       - id: user_integer_1
         type: s2
-        doc: 0x035f-0x0360, $USERI1
+        doc: 0x035f-0x0360, $USERI1/70
       - id: user_integer_2
         type: s2
-        doc: 0x0361-0x0362, $USERI2
+        doc: 0x0361-0x0362, $USERI2/70
       - id: user_integer_3
         type: s2
-        doc: 0x0363-0x0364, $USERI3
+        doc: 0x0363-0x0364, $USERI3/70
       - id: user_integer_4
         type: s2
-        doc: 0x0365-0x0366, $USERI4
+        doc: 0x0365-0x0366, $USERI4/70
       - id: user_integer_5
         type: s2
-        doc: 0x0367-0x0368, $USERI5
+        doc: 0x0367-0x0368, $USERI5/70
       - id: user_real_1
         type: f8
-        doc: $USERR1
+        doc: $USERR1/40
       - id: user_real_2
         type: f8
-        doc: $USERR2
+        doc: $USERR2/40
       - id: user_real_3
         type: f8
-        doc: $USERR3
+        doc: $USERR3/40
       - id: user_real_4
         type: f8
-        doc: $USERR4
+        doc: $USERR4/40
       - id: user_real_5
         type: f8
-        doc: $USERR5
+        doc: $USERR5/40
       - id: dim_alternate_units
         type: s1
-        doc: 0x03a1, $DIMALT
+        doc: 0x03a1, $DIMALT/70
       - id: dim_alternate_units_decimal_places
         type: s1
-        doc: 0x03a2, $DIMALTD
+        doc: 0x03a2, $DIMALTD/70
       - id: dim_associative
         type: s1
-        doc: 0x03a3, $DIMASO
+        doc: 0x03a3, $DIMASO/70
       - id: dim_sho
         type: s1
-        doc: 0x03a4, $DIMSHO
+        doc: 0x03a4, $DIMSHO/70
       - id: dim_measurement_postfix
         size: 16
         type: str
         encoding: ASCII
         terminator: 0x00
-        doc: $DIMPOST, TODO And prefix?
+        doc: $DIMPOST/1
       - id: dim_alternate_measurement_postfix
         size: 16
         type: str
         encoding: ASCII
         terminator: 0x00
-        doc: $DIMAPOST, TODO And prefix
+        doc: $DIMAPOST/1
       - id: dim_alternate_units_multiplier
         type: f8
-        doc: 0x03c5-0x03cc, $DIMALTF
+        doc: 0x03c5-0x03cc, $DIMALTF/40
       - id: dim_linear_measurements_scale_factor
         type: f8
-        doc: 0x03cd-0x03d4, $DIMLFAC
+        doc: 0x03cd-0x03d4, $DIMLFAC/40
       - id: spline_segs
         type: s2
-        doc: 0x03d5-0x03d6, $SPLINESEGS
+        doc: 0x03d5-0x03d6, $SPLINESEGS/70
       - id: spline_frame
         type: s2
-        doc: 0x03d7-0x03d8, $SPLFRAME
+        doc: 0x03d7-0x03d8, $SPLFRAME/70
       - id: attreq
         type: u2
         doc: 0x03d9-0x03da, $ATTREQ/70
@@ -563,7 +563,7 @@ types:
         doc: 0x04e5-0x04ec, $CHAMFERB/40
       - id: mirror_text
         type: s2
-        doc: 0x03ed-0x03ee, $MIRRTEXT
+        doc: 0x03ed-0x03ee, $MIRRTEXT/70
     instances:
       create_date:
         value: create_date_days + (create_date_ms / 86400000.0)

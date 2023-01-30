@@ -65,7 +65,7 @@ types:
     seq:
       - id: flag1
         type: b1
-      - id: flag2
+      - id: referenced
         type: b1
       - id: flag3
         type: b1
@@ -75,9 +75,9 @@ types:
         type: b1
       - id: flag6
         type: b1
-      - id: flag7
+      - id: has_attributes
         type: b1
-      - id: flag8
+      - id: anonymous
         type: b1
   header:
     seq:

@@ -13,4 +13,5 @@ my $data_dir = File::Object->new->up->dir('data/blank')->set;
 my $obj = CAD::Format::DWG::AC1004->from_file(
 	$data_dir->file('BLANK.DWG')->s,
 );
-is($obj->header->blocks_start, 1425, 'Start address of blocks section (1425).');
+is($obj->header->extra_entities_start, 1425,
+	'Start address of extra entities section (1425).');

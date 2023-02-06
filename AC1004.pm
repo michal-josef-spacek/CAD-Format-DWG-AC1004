@@ -4632,11 +4632,11 @@ sub _read {
     $self->{block_entities_size_raw} = $self->{_io}->read_u4le();
     $self->{extra_entities_start} = $self->{_io}->read_s4le();
     $self->{extra_entities_size_raw} = $self->{_io}->read_u4le();
-    $self->{table_block} = CAD::Format::DWG::AC1004::Table->new($self->{_io}, $self, $self->{_root});
-    $self->{table_layer} = CAD::Format::DWG::AC1004::Table->new($self->{_io}, $self, $self->{_root});
-    $self->{table_style} = CAD::Format::DWG::AC1004::Table->new($self->{_io}, $self, $self->{_root});
-    $self->{table_linetype} = CAD::Format::DWG::AC1004::Table->new($self->{_io}, $self, $self->{_root});
-    $self->{table_view} = CAD::Format::DWG::AC1004::Table->new($self->{_io}, $self, $self->{_root});
+    $self->{table_block} = CAD::Format::DWG::AC1004::HeaderTable->new($self->{_io}, $self, $self->{_root});
+    $self->{table_layer} = CAD::Format::DWG::AC1004::HeaderTable->new($self->{_io}, $self, $self->{_root});
+    $self->{table_style} = CAD::Format::DWG::AC1004::HeaderTable->new($self->{_io}, $self, $self->{_root});
+    $self->{table_linetype} = CAD::Format::DWG::AC1004::HeaderTable->new($self->{_io}, $self, $self->{_root});
+    $self->{table_view} = CAD::Format::DWG::AC1004::HeaderTable->new($self->{_io}, $self, $self->{_root});
     $self->{variables} = CAD::Format::DWG::AC1004::HeaderVariables->new($self->{_io}, $self, $self->{_root});
 }
 
@@ -5514,62 +5514,6 @@ sub type {
 }
 
 ########################################################################
-package CAD::Format::DWG::AC1004::Table;
-
-our @ISA = 'IO::KaitaiStruct::Struct';
-
-sub from_file {
-    my ($class, $filename) = @_;
-    my $fd;
-
-    open($fd, '<', $filename) or return undef;
-    binmode($fd);
-    return new($class, IO::KaitaiStruct::Stream->new($fd));
-}
-
-sub new {
-    my ($class, $_io, $_parent, $_root) = @_;
-    my $self = IO::KaitaiStruct::Struct->new($_io);
-
-    bless $self, $class;
-    $self->{_parent} = $_parent;
-    $self->{_root} = $_root || $self;;
-
-    $self->_read();
-
-    return $self;
-}
-
-sub _read {
-    my ($self) = @_;
-
-    $self->{item_size} = $self->{_io}->read_u2le();
-    $self->{items} = $self->{_io}->read_u2le();
-    $self->{unknown} = $self->{_io}->read_bytes(2);
-    $self->{begin} = $self->{_io}->read_u4le();
-}
-
-sub item_size {
-    my ($self) = @_;
-    return $self->{item_size};
-}
-
-sub items {
-    my ($self) = @_;
-    return $self->{items};
-}
-
-sub unknown {
-    my ($self) = @_;
-    return $self->{unknown};
-}
-
-sub begin {
-    my ($self) = @_;
-    return $self->{begin};
-}
-
-########################################################################
 package CAD::Format::DWG::AC1004::EntityPolyline;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -5753,6 +5697,62 @@ sub view_dir {
 sub flag_3d {
     my ($self) = @_;
     return $self->{flag_3d};
+}
+
+########################################################################
+package CAD::Format::DWG::AC1004::HeaderTable;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{item_size} = $self->{_io}->read_u2le();
+    $self->{items} = $self->{_io}->read_u2le();
+    $self->{unknown} = $self->{_io}->read_bytes(2);
+    $self->{begin} = $self->{_io}->read_u4le();
+}
+
+sub item_size {
+    my ($self) = @_;
+    return $self->{item_size};
+}
+
+sub items {
+    my ($self) = @_;
+    return $self->{items};
+}
+
+sub unknown {
+    my ($self) = @_;
+    return $self->{unknown};
+}
+
+sub begin {
+    my ($self) = @_;
+    return $self->{begin};
 }
 
 1;

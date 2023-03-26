@@ -37,8 +37,8 @@ our $ENTITIES_INSERT = 14;
 our $ENTITIES_ATTDEF = 15;
 our $ENTITIES_ATTRIB = 16;
 our $ENTITIES_SEQEND = 17;
-our $ENTITIES_POLYLINE = 18;
-our $ENTITIES_POLYLINE2 = 19;
+our $ENTITIES_JUMP = 18;
+our $ENTITIES_POLYLINE = 19;
 our $ENTITIES_VERTEX = 20;
 our $ENTITIES_LINE3D = 21;
 our $ENTITIES_FACE3D = 22;
@@ -2951,6 +2951,78 @@ sub aligned_to {
 }
 
 ########################################################################
+package CAD::Format::DWG::AC1004::EntityJump;
+
+our @ISA = 'IO::KaitaiStruct::Struct';
+
+sub from_file {
+    my ($class, $filename) = @_;
+    my $fd;
+
+    open($fd, '<', $filename) or return undef;
+    binmode($fd);
+    return new($class, IO::KaitaiStruct::Stream->new($fd));
+}
+
+sub new {
+    my ($class, $_io, $_parent, $_root) = @_;
+    my $self = IO::KaitaiStruct::Struct->new($_io);
+
+    bless $self, $class;
+    $self->{_parent} = $_parent;
+    $self->{_root} = $_root || $self;;
+
+    $self->_read();
+
+    return $self;
+}
+
+sub _read {
+    my ($self) = @_;
+
+    $self->{entity_mode} = CAD::Format::DWG::AC1004::EntityMode->new($self->{_io}, $self, $self->{_root});
+    $self->{entity_size} = $self->{_io}->read_s2le();
+    $self->{address_raw} = $self->{_io}->read_u4le();
+    if ($self->entity_size() > 8) {
+        $self->{unknown_data} = $self->{_io}->read_bytes(($self->entity_size() - 8));
+    }
+}
+
+sub address_flag {
+    my ($self) = @_;
+    return $self->{address_flag} if ($self->{address_flag});
+    $self->{address_flag} = (($self->address_raw() & 4278190080) >> 24);
+    return $self->{address_flag};
+}
+
+sub address {
+    my ($self) = @_;
+    return $self->{address} if ($self->{address});
+    $self->{address} = ($self->address_raw() & 16777215);
+    return $self->{address};
+}
+
+sub entity_mode {
+    my ($self) = @_;
+    return $self->{entity_mode};
+}
+
+sub entity_size {
+    my ($self) = @_;
+    return $self->{entity_size};
+}
+
+sub address_raw {
+    my ($self) = @_;
+    return $self->{address_raw};
+}
+
+sub unknown_data {
+    my ($self) = @_;
+    return $self->{unknown_data};
+}
+
+########################################################################
 package CAD::Format::DWG::AC1004::GenerationFlags;
 
 our @ISA = 'IO::KaitaiStruct::Struct';
@@ -4447,9 +4519,6 @@ sub _read {
     elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_INSERT) {
         $self->{data} = CAD::Format::DWG::AC1004::EntityInsert->new($self->{_io}, $self, $self->{_root});
     }
-    elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_POLYLINE2) {
-        $self->{data} = CAD::Format::DWG::AC1004::EntityPolyline->new($self->{_io}, $self, $self->{_root});
-    }
     elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_CIRCLE) {
         $self->{data} = CAD::Format::DWG::AC1004::EntityCircle->new($self->{_io}, $self, $self->{_root});
     }
@@ -4467,6 +4536,9 @@ sub _read {
     }
     elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_ATTDEF) {
         $self->{data} = CAD::Format::DWG::AC1004::EntityAttdef->new($self->{_io}, $self, $self->{_root});
+    }
+    elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_JUMP) {
+        $self->{data} = CAD::Format::DWG::AC1004::EntityJump->new($self->{_io}, $self, $self->{_root});
     }
     elsif ($_on == $CAD::Format::DWG::AC1004::ENTITIES_BLOCK_END) {
         $self->{data} = CAD::Format::DWG::AC1004::EntityBlockEnd->new($self->{_io}, $self, $self->{_root});

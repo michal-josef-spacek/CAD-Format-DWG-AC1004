@@ -4700,8 +4700,7 @@ sub new {
 sub _read {
     my ($self) = @_;
 
-    $self->{magic} = $self->{_io}->read_bytes(6);
-    $self->{zeros} = $self->{_io}->read_bytes(6);
+    $self->{magic} = Encode::decode("ASCII", IO::KaitaiStruct::Stream::bytes_terminate($self->{_io}->read_bytes(12), 0, 0));
     $self->{zero_one_or_three} = $self->{_io}->read_s1();
     $self->{num_entity_sections} = $self->{_io}->read_s2le();
     $self->{num_sections} = $self->{_io}->read_s2le();
@@ -4759,11 +4758,6 @@ sub extra_entities_size {
 sub magic {
     my ($self) = @_;
     return $self->{magic};
-}
-
-sub zeros {
-    my ($self) = @_;
-    return $self->{zeros};
 }
 
 sub zero_one_or_three {
